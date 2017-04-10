@@ -10,7 +10,7 @@ var cleanCSS = require('gulp-clean-css');
 var run = require('gulp-run');
 var del = require('del');
 
-var JCR_ROOT = './ui/src/main/content/jcr_root',
+var JCR_ROOT = './src/main/content/jcr_root',
     SOURCE_SASS = JCR_ROOT + '/etc/designs/filevault/stylesheets',
     SOURCE_JS = JCR_ROOT + '/etc/designs/filevault/clientlibs/js/',    
     DEST_CSS = JCR_ROOT + '/etc/designs/filevault/clientlibs/css/min',
@@ -99,6 +99,8 @@ gulp.task('default', [
 );
 
 gulp.task('build', [
+    'clean-css',
+    'clean-js',
     'generate-css',
     'generate-js', 
     ]
