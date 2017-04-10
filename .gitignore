@@ -1,0 +1,25 @@
+.DS_Store
+target/
+
+.idea/
+*.iml
+
+.vlt*
+*.jar
+
+# Eclipse
+.settings/
+.project
+.classpath
+
+# Brackets config
+.brackets.json
+
+# Node
+node_modules/
+
+ # Generated files
+ *.min.*
+
+ # Mac
+ .DS_Store

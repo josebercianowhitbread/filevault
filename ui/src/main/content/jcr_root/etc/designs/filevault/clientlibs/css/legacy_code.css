@@ -1,0 +1,23 @@
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 23px;
+}
+
+.container-fixed {
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+}
+
+
+.header-logo {
+    height: 140px;
+}
+
+.header-wrapper {
+    border-bottom: solid rgba(195, 30, 30, 0.9);
+}
