@@ -1,26 +1,26 @@
-.DS_Store
+# Generated files
 target/
-
-.idea/
-min/
-*.iml
-
-.vlt*
 *.jar
+*.min.*
+
+# NodeJs
+node_modules/
+node/
+
+# Vault
+.vlt*
 
 # Eclipse
-.settings/
+.settings
 .project
 .classpath
 
 # Brackets config
 .brackets.json
 
-# Node
-node_modules/
-
- # Generated files
- *.min.*
+# IntelliJ
+.idea/
+*.iml
 
  # Mac
  .DS_Store

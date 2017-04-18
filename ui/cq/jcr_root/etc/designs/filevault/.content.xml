@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:template="/libs/wcm/core/templates/designpage"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Whitbread Filevault Design"
+        sling:resourceType="wcm/core/components/designer">
+       <main jcr:primaryType="nt:unstructured">
+            <main-par
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="foundation/components/parsys"
+                components="[group:General]">
+                <section jcr:primaryType="nt:unstructured"/>
+            </main-par>
+        </main>
+    </jcr:content>
+    <clientlibs/>
+</jcr:root>

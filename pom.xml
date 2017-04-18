@@ -10,7 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Whitbread Filevault Demo - Parent Project</name>
+    <name>Whitbread Filevault Demo</name>
     <description>Maven Multimodule project for Whitbread Filevault Demo.</description>
 
     <prerequisites>
@@ -33,6 +33,9 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
+    <!-- ====================================================================== -->
+    <!-- D E P E N D E N C I E S -->
+    <!-- ====================================================================== -->
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -107,11 +110,12 @@
 	            <version>5.6.6</version>
 	            <scope>provided</scope>
 	        </dependency>
-            
-            
-            
         </dependencies>
     </dependencyManagement>
+
+    <!-- ====================================================================== -->
+    <!-- R E P O S I T O R I E S -->
+    <!-- ====================================================================== -->
     <repositories>
         <repository>
             <id>adobe</id>
@@ -119,8 +123,8 @@
             <url>http://repo.adobe.com/nexus/content/groups/public/</url>
             <layout>default</layout>
         </repository>
-        
     </repositories>
+
     <pluginRepositories>
         <pluginRepository>
             <id>adobe</id>
@@ -130,6 +134,9 @@
         </pluginRepository>
     </pluginRepositories>
 
+    <!-- ====================================================================== -->
+    <!-- B U I L D -->
+    <!-- ====================================================================== -->
     <build>
         <pluginManagement>
             <plugins>
@@ -225,10 +232,50 @@
                         </lifecycleMappingMetadata>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <groupId>com.github.eirslett</groupId>
+                    <artifactId>frontend-maven-plugin</artifactId>
+                    <version>1.4</version>
+                    <executions>
+                        <execution>
+                            <id>install node and npm</id>
+                            <goals>
+                                <goal>install-node-and-npm</goal>
+                            </goals>
+                            <configuration>
+                              <!-- See https://nodejs.org/en/download/ for latest node and npm (lts) versions -->
+                                <nodeVersion>v4.6.1</nodeVersion>
+                                <npmVersion>2.15.9</npmVersion>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>npm install</id>
+                            <goals>
+                                <goal>npm</goal>
+                            </goals>
+                            <!-- Optional configuration which provides for running any npm command -->
+                            <configuration>
+                                <arguments>install</arguments>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>gulp build</id>
+                            <goals>
+                                <goal>gulp</goal>
+                            </goals>
+                            <configuration>
+                                <arguments>build</arguments>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
 
+    <!-- ====================================================================== -->
+    <!-- P R O F I L E S -->
+    <!-- ====================================================================== -->
     <profiles>
         <profile>
             <id>autoInstallBundle</id>
@@ -250,9 +297,12 @@
             </build>
         </profile>
     </profiles>
+
+    <!-- ====================================================================== -->
+    <!-- M O D U L E S -->
+    <!-- ====================================================================== -->    
   <modules>
     <module>bundle</module>
     <module>ui</module>
-    <!-- <module>content</module> -->
   </modules>
 </project>

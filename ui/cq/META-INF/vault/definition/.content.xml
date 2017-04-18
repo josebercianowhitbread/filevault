@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:vlt="http://www.day.com/jcr/vault/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:description="Maven Multimodule project for Whitbread Filevault Demo."
+    jcr:primaryType="vlt:PackageDefinition"
+    buildCount="1"
+    group="Whitebread"
+    name="filevault-content"
+    version="1.0-SNAPSHOT">
+</jcr:root>

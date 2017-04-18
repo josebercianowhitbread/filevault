@@ -10,7 +10,7 @@ var cleanCSS = require('gulp-clean-css');
 var run = require('gulp-run');
 var del = require('del');
 
-var JCR_ROOT = './ui/src/main/content/jcr_root',
+var JCR_ROOT = 'ui/cq/jcr_root',
     SOURCE_SASS = JCR_ROOT + '/etc/designs/filevault/stylesheets',
     SOURCE_JS = JCR_ROOT + '/etc/designs/filevault/clientlibs/js/',    
     DEST_CSS = JCR_ROOT + '/etc/designs/filevault/clientlibs/css/min',
@@ -37,7 +37,8 @@ gulp.task('generate-js', function() {
         .pipe(concat('site.min.js'))
         .pipe(uglify())
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest(DEST_JS));
+        .pipe(gulp.dest(DEST_JS))
+        ;
 });
 
 gulp.task('generate-css', function () {
@@ -51,31 +52,6 @@ gulp.task('generate-css', function () {
     ;
 });
 
-gulp.task('sync-js', function() {
-  runSequence(
-      'clean-js',
-      'generate-js',
-      'import-js'
-  );
-});
-
-gulp.task('import-js', function() {
-  run('vlt --credentials admin:admin import http://localhost:4502/crx ./etc/designs/filevault/clientlibs/js/min', 
-      {cwd:JCR_ROOT}).exec();
-});
-
-gulp.task('watch-js', function () {
-    gulp.watch([
-        SOURCE_JS + '/**/*.js', 
-        '!' + DEST_JS + '/**/*.min.*'
-      ], ['sync-js']);
-});
-
-gulp.task('import-css', function(){
-    run('vlt --credentials admin:admin import http://localhost:4502/crx ./etc/designs/filevault/clientlibs/css/min', 
-      {cwd:JCR_ROOT}).exec();
-});
-
 gulp.task('sync-css', function() {
   runSequence(
       'clean-css',
@@ -84,8 +60,37 @@ gulp.task('sync-css', function() {
   );
 });
 
+gulp.task('sync-js', function() {
+  runSequence(
+      'clean-js',
+      'generate-js',
+      'import-js'
+  );
+});
+
+gulp.task('import-css', function(){
+    // TODO: create a environment variable with your path to vlt and amend the following line
+    run('../../../vault-cli-2.4.34/bin/vlt --credentials admin:admin import http://localhost:4502/crx etc/designs/filevault/clientlibs/css/min', 
+      // Vault has to be run from the jcr_root folder, set the current working directory to do so...
+      {cwd:JCR_ROOT}).exec();
+});
+
+gulp.task('import-js', function() {
+// TODO: create a environment variable with your path to vlt and amend the following line
+    run('../../../vault-cli-2.4.34/bin/vlt --credentials admin:admin import http://localhost:4502/crx etc/designs/filevault/clientlibs/js/min', 
+      // Vault has to be run from the jcr_root folder, set the current working directory to do so...
+      {cwd:JCR_ROOT}).exec();
+});
+
 gulp.task('watch-sass', function () {
     gulp.watch(SOURCE_SASS + '/**/*.scss', ['sync-css']);
+});
+
+gulp.task('watch-js', function () {
+    gulp.watch([
+        SOURCE_JS + '/**/*.js', 
+        '!' + DEST_JS + '/**/*.min.*'
+      ], ['sync-js']);
 });
 
 gulp.task('default', [
@@ -99,6 +104,8 @@ gulp.task('default', [
 );
 
 gulp.task('build', [
+    'clean-css',
+    'clean-js',
     'generate-css',
     'generate-js', 
     ]
